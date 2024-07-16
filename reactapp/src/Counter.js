@@ -1,5 +1,12 @@
+import {useState} from "react";
+
 function Counter() {
-    var count = 0;
+
+    const [count, setCount] = useState(0);
+    setInterval(function(){
+        setCount(count+1);
+        console.log("count=",count);
+    }, 1000);
     return (
         <>
         The counter is set to: {count}
