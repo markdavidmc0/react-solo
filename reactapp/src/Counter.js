@@ -1,15 +1,23 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
-function Counter() {
+function Counter(props) {
+    var init = parseInt(props.init || 0);
+    const [count, setCount] = useState(init);
 
-    const [count, setCount] = useState(0);
-    setInterval(function(){
-        setCount(count+1);
-        console.log("count=",count);
-    }, 1000);
+    useEffect(function(){
+        var timer = setInterval(function(){
+            setCount((count)=>count+1);
+            console.log("count=",count);
+        }, 1000);
+        return function(){
+            clearInterval(timer);
+        }
+    })
     return (
         <>
-        The counter is set to: {count}
+        Initial value of counter is: {init}
+        <br/>
+        The counter is: {count}
         </>
     )
 }
