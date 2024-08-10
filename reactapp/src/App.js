@@ -1,16 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
 import Counter from "./Counter.js"
+import React from 'react';
 
 function App() {
   return (
     <>
-    Counter defined by {"<Counter init='10'/>"} :<br/><Counter init='10'/><br/>
-    <br/>
-    Counter defined by {"<Counter init={5}/>"} :<br/><Counter init={5}/><br/>
-    <br/>
-    Counter defined by {"<Counter/>"} :<br/><Counter/><br/>
-    <br/>
+    {
+      (function(){
+        var jsx = [];
+        for (var i=0; i<3; i++) {
+          jsx.push(
+            <React.Fragment key={i}>
+            Counter {i} defined by {`<Counter init='5' end='${10+i}' />`}: <br/>
+            <Counter init='5' end={10+i}/>
+            <br/><br/>
+            </React.Fragment>
+          );
+        }
+        return jsx;
+      })()
+    }
     </>
   );
 }
